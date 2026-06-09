@@ -1,0 +1,62 @@
+package com.saucedemo.utils;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import com.saucedemo.config.ConfigReader;
+import org.openqa.selenium.edge.EdgeDriver;
+
+/* DriverManager is responsible for initializing and quitting WebDriver instances
+based on config settings */
+
+public class DriverManager {
+    // ThreadLocal ensures each parallel (via Cucumber or TestNG) thread gets its own WebDriver instance
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
+
+    public static void initDriver() {
+        String browser = ConfigReader.getBrowser().toLowerCase();
+        boolean headless = ConfigReader.isHeadless();
+        WebDriver webDriver;
+
+        switch (browser) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                if (headless) chromeOptions.addArguments("--headless=new");
+                chromeOptions.addArguments("--start-maximized", "--disable-notifications");
+                webDriver = new ChromeDriver(chromeOptions);
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions ffOptions = new FirefoxOptions();
+                if (headless) ffOptions.addArguments("--headless=n");
+                webDriver = new FirefoxDriver(ffOptions);
+                break;
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                webDriver = new EdgeDriver();
+                break;
+            default:
+                throw new RuntimeException("Unsupported browser: " + browser);
+        }
+
+        webDriver.manage().timeouts()
+            .implicitlyWait(java.time.Duration.ofSeconds(ConfigReader.getImplicitWait()));
+        driver.set(webDriver);
+    }
+
+    public static void quitDriver() {
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
+        }
+    }
+}
