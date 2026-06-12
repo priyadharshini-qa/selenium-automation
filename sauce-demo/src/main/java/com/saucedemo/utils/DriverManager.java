@@ -48,8 +48,6 @@ public class DriverManager {
                 throw new RuntimeException("Unsupported browser: " + browser);
         }
 
-        webDriver.manage().timeouts()
-            .implicitlyWait(java.time.Duration.ofSeconds(ConfigReader.getImplicitWait()));
         driver.set(webDriver);
     }
 

@@ -15,12 +15,20 @@ public class WaitUtils {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getExplicitWait()));
     }
 
-   /*  public WebElement waitForVisible(By locator) {
+    public WebElement waitForVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public WebElement waitForVisible(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public WebElement waitForClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public WebElement waitForClickable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public boolean waitForTextPresent(By locator, String text) {
@@ -29,5 +37,5 @@ public class WaitUtils {
 
     public boolean waitForUrlContains(String urlFragment) {
         return wait.until(ExpectedConditions.urlContains(urlFragment));
-    } */
+    }
 }
