@@ -15,7 +15,7 @@ based on config settings */
 
 public class DriverManager {
     // ThreadLocal ensures each parallel (via Cucumber or TestNG) thread gets its own WebDriver instance
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return driver.get();
