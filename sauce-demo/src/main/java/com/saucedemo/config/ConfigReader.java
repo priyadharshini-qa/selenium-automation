@@ -6,25 +6,34 @@ import java.util.Properties;
 
 /* This file is about reading the data from config.properties */
 public class ConfigReader {
-    private static Properties properties;
-    private static final String CONFIG_PATH = "resources/config.properties";
-    //ConfigReader.class.getClassLoader().getResourceAsStream("config.properties")
+   private static Properties properties;
 
-    static {
-        try {
-            FileInputStream fis = new FileInputStream(CONFIG_PATH);
-            properties = new Properties();
-            properties.load(fis);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load config.properties: " + e.getMessage());
+static {
+    try {
+        // Use ClassLoader to load from classpath (proper for JAR/Maven)
+        var resourceStream = ConfigReader.class.getClassLoader()
+            .getResourceAsStream("config.properties");
+        
+        if (resourceStream == null) {
+            throw new IOException("config.properties not found in classpath");
         }
+        
+        properties = new Properties();
+        properties.load(resourceStream);
+        resourceStream.close(); 
+        
+    } catch (IOException e) {
+        throw new RuntimeException("Failed to load config.properties: " + e.getMessage(), e);
     }
+}
 
-    public static String get(String key) {
-        String value = properties.getProperty(key);
-        if (value == null) throw new RuntimeException("Property '" + key + "' not found.");
-        return value.trim();
+public static String get(String key) {
+    String value = properties.getProperty(key);
+    if (value == null) {
+        throw new IllegalArgumentException("Property '" + key + "' not found in config.properties");
     }
+    return value.trim();
+}
 
     public static String getBaseUrl() {         
         return get("baseUrl"); 

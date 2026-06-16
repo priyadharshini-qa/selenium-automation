@@ -24,32 +24,23 @@ public class LoginPage extends BasePage {
     private By inventoryHeader = By.id("inventory_container");
 
     // --- Constructor ---
-    public LoginPage(WebDriver driver) {
+    public LoginPage() {
         super();
         
     }
 
     // --- Actions ---
     public void enterUsername(String username) {
-        WebElement field = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(usernameField)
-        );
-        field.clear();
-        field.sendKeys(username);
+        type(usernameField, username);  // Use BasePage's type() method
     }
 
     public void enterPassword(String password) {
-        WebElement field = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(passwordField)
-        );
-        field.clear();
-        field.sendKeys(password);
+        type(passwordField, password);  // Use BasePage's type() method
     }
+    
 
     public void clickLoginButton() {
-        wait.until(
-            ExpectedConditions.elementToBeClickable(loginButton)
-        ).click();
+        click(loginButton);  // Use BasePage's click() method
     }
 
     // --- Composite Action (full login in one call) ---
@@ -61,32 +52,14 @@ public class LoginPage extends BasePage {
 
     // --- State Checks ---
     public boolean isLoginSuccessful() {
-        try {
-            return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(inventoryHeader)
-            ).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isDisplayed(inventoryHeader);  // Use BasePage method
     }
 
     public String getErrorMessage() {
-        try {
-            return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(errorMessage)
-            ).getText();
-        } catch (Exception e) {
-            return "";
-        }
+        return getText(errorMessage);  //  Use BasePage method
     }
 
     public boolean isErrorDisplayed() {
-    try {
-        return wait.until(
-            ExpectedConditions.visibilityOfElementLocated(errorMessage)
-        ).isDisplayed();
-    } catch (Exception e) {
-        return false;
-    }
+        return isDisplayed(errorMessage);
 }
 }
