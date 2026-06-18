@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class CheckoutFinal extends BasePage {
+public class CheckoutConfirmationPage extends BasePage {
 
     // --- Locators ---
     private By checkoutContainer    = By.id("checkout_summary_container");
@@ -40,7 +40,7 @@ public class CheckoutFinal extends BasePage {
     private By backHomeBtn           = By.cssSelector("[data-test='back-to-products']");
 
     // --- Constructor ---
-    public CheckoutFinal() {
+    public CheckoutConfirmationPage() {
         super();
     }
 

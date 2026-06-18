@@ -3,7 +3,7 @@ package com.saucedemo.pages;
 import com.saucedemo.base.BasePage;
 import org.openqa.selenium.By;
 
-public class CheckoutDetails extends BasePage {
+public class CheckoutDetailsPage extends BasePage {
 
     // --- Locators ---
     private By checkoutContainer  = By.id("checkout_info_container");
@@ -17,7 +17,7 @@ public class CheckoutDetails extends BasePage {
     private By errorCloseBtn      = By.className("error-button");
 
     // --- Constructor ---
-    public CheckoutDetails() {
+    public CheckoutDetailsPage() {
         super();
     }
 

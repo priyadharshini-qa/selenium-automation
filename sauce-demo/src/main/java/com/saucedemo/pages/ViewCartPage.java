@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class ViewCart extends BasePage {
+public class ViewCartPage extends BasePage {
 
     // --- Locators ---
     private By cartContainer        = By.id("cart_contents_container");
@@ -26,7 +26,7 @@ public class ViewCart extends BasePage {
     }
 
     // --- Constructor ---
-    public ViewCart() {
+    public ViewCartPage() {
         super();
     }
 
