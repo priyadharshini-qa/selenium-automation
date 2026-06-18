@@ -1,29 +1,33 @@
 Feature: Login functionality
+  As a registered user of SauceDemo
+  I want to log in to the application
+  So that I can access the product inventory
 
   Background:
     Given the user is on the login page
 
-  Scenario: Successful login with valid credentials
-    When the user enters username "standard_user" and password "secret_sauce"
-    And the user clicks the login button
+  @smoke @regression
+  Scenario Outline: Successful login for valid user types
+    When the user logs in with username "<username>" and password "<password>"
     Then the user should be redirected to the inventory page
 
-  Scenario: Login with invalid credentials
-    When the user enters username "invalid_user" and password "wrong_pass"
-    And the user clicks the login button
+    Examples:
+      | scenario                | username                  | password     |
+      | Standard user           | standard_user             | secret_sauce |
+      | Problem user            | problem_user              | secret_sauce |
+      | Performance glitch user | performance_glitch_user   | secret_sauce |
+      | Error user              | error_user                | secret_sauce |
+      | Visual user             | visual_user               | secret_sauce |
+
+  @regression
+  Scenario Outline: Unsuccessful login attempts
+    When the user logs in with username "<username>" and password "<password>"
     Then an error message should be displayed
 
-  Scenario: Login with empty username
-    When the user enters username "" and password "secret_sauce"
-    And the user clicks the login button
-    Then an error message should be displayed
-
-  Scenario: Login with empty password
-    When the user enters username "standard_user" and password ""
-    And the user clicks the login button
-    Then an error message should be displayed
-
-  Scenario: Login with locked out user
-    When the user enters username "locked_out_user" and password "secret_sauce"
-    And the user clicks the login button
-    Then an error message should be displayed
+    Examples:
+      | scenario              | username        | password     |
+      | Locked out user       | locked_out_user | secret_sauce |
+      | Invalid credentials   | invalid_user    | wrong_pass   |
+      | Empty username        |                 | secret_sauce |
+      | Empty password        | standard_user   |              |
+      | Empty both fields     |                 |              |

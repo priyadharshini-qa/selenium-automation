@@ -1,7 +1,6 @@
 package com.saucedemo.stepdefinitions;
 
 import com.saucedemo.pages.LoginPage;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,14 +16,10 @@ public class LoginSteps {
         loginPage = new LoginPage();
     }
 
-    @When("the user enters username {string} and password {string}")
-    public void theUserEntersUsernameAndPassword(String username, String password) {
+    @When("the user logs in with username {string} and password {string}")
+    public void theUserLogsInWithUsernameAndPassword(String username, String password) {
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
-    }
-
-    @And("the user clicks the login button")
-    public void theUserClicksTheLoginButton() {
         loginPage.clickLoginButton();
     }
 
