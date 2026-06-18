@@ -13,3 +13,8 @@ Thumbs.db
 
 # Screenshots (generated at runtime)
 sauce-demo/target/screenshots/
+
+# Runtime logs
+sauce-demo/logs/
+logs/
+*.log

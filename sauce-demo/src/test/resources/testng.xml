@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SauceDemo Automation Suite" parallel="tests" thread-count="2">
+<suite name="SauceDemo Automation Suite" parallel="none">
 
-    <!-- Test definition -->
-    <test name="Login Tests" enabled="true">
+    <test name="Login Tests">
         <classes>
             <class name="com.saucedemo.runners.TestRunner"/>
         </classes>

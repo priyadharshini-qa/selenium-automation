@@ -6,10 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import java.time.Duration;
 
 import com.saucedemo.config.ConfigReader;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
 
 /* DriverManager is responsible for initializing and quitting WebDriver instances
 based on config settings */
@@ -26,7 +27,7 @@ public class DriverManager {
         String browser = ConfigReader.getBrowser().toLowerCase();
         boolean headless = ConfigReader.isHeadless();
         WebDriver webDriver;
-        int implicitWaitSeconds = ConfigReader.getImplicitWait();
+
         switch (browser) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
@@ -34,19 +35,18 @@ public class DriverManager {
                 if (headless) chromeOptions.addArguments("--headless=new");
                 chromeOptions.addArguments("--start-maximized", "--disable-notifications");
                 webDriver = new ChromeDriver(chromeOptions);
-                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions ffOptions = new FirefoxOptions();
                 if (headless) ffOptions.addArguments("--headless=n");
                 webDriver = new FirefoxDriver(ffOptions);
-                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();
-                webDriver = new EdgeDriver();
-                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWaitSeconds));
+                EdgeOptions edgeOptions = new EdgeOptions();
+                if (headless) edgeOptions.addArguments("--headless=new");
+                webDriver = new EdgeDriver(edgeOptions);
                 break;
             default:
                 throw new RuntimeException("Unsupported browser: " + browser);

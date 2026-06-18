@@ -12,9 +12,6 @@ import com.saucedemo.base.BasePage;
 
 public class LoginPage extends BasePage {
 
-    
-    
-    private WebDriverWait wait;
 
     // --- Locators ---
     private By usernameField   = By.id("user-name");
