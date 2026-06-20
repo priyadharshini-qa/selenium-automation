@@ -5,7 +5,7 @@ Feature: Checkout functionality
 
   Background:
     Given the user is on the login page
-    And the user logs in with username "standard_user" and password "secret_sauce"
+    And the user logs in as the standard user
     And the user has added "Sauce Labs Backpack" to the cart
     And the user navigates to the cart page
     And the user clicks checkout from the cart page

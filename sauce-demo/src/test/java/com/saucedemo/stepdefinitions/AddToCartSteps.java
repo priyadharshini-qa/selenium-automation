@@ -2,8 +2,10 @@ package com.saucedemo.stepdefinitions;
 
 import com.saucedemo.config.ConfigReader;
 import com.saucedemo.pages.AddToCartPage;
+import com.saucedemo.pages.LoginPage;
 import com.saucedemo.utils.ExcelReader;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -14,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AddToCartSteps {
 
     private AddToCartPage addToCartPage;
+    private LoginPage loginPage;
     private String lastAddedProduct;
     private int productsAddedCount;
 
@@ -34,6 +37,10 @@ public class AddToCartSteps {
         return productNames;
     }
 
+    @Given("the user logs in as the standard user")
+    public void theUserLogsInAsTheStandardUser() {
+        loginPage.login(ConfigReader.get("standardUsername"), ConfigReader.get("standardPassword"));
+}
     @When("the user adds the first product from test data to the cart")
     public void theUserAddsTheFirstProductFromTestDataToTheCart() {
         lastAddedProduct = getProductNamesFromTestData().get(0);

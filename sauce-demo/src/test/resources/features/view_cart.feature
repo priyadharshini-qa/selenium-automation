@@ -5,7 +5,7 @@ Feature: View Cart functionality
 
   Background:
     Given the user is on the login page
-    And the user logs in with username "standard_user" and password "secret_sauce"
+    And the user logs in as the standard user
 
   @smoke @regression
   Scenario: View cart after adding a product

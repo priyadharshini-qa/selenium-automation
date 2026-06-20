@@ -1,6 +1,7 @@
 package com.saucedemo.stepdefinitions;
-
+import com.saucedemo.config.ConfigReader;
 import com.saucedemo.pages.AddToCartPage;
+import com.saucedemo.pages.LoginPage;
 import com.saucedemo.pages.ViewCartPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ViewCartSteps {
-
+    private LoginPage loginPage ;
     private AddToCartPage addToCartPage;
     private ViewCartPage viewCartPage;
 
@@ -26,6 +27,10 @@ public class ViewCartSteps {
             viewCartPage = new ViewCartPage();
         }
         return viewCartPage;
+    }
+    @Given("the user logs in as the standard user")
+        public void theUserLogsInAsTheStandardUser() {
+            loginPage.login(ConfigReader.get("standardUsername"), ConfigReader.get("standardPassword"));
     }
 
     @Given("the user has added {string} to the cart")

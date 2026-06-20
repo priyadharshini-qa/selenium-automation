@@ -7,5 +7,15 @@
             <class name="com.saucedemo.runners.TestRunner"/>
         </classes>
     </test>
+    <test name="Smoke Tests">
+        <classes>
+            <class name="com.saucedemo.runners.SmokeTestRunner"/>
+        </classes>
+    </test>
+    <test name="Regression Tests">
+        <classes>
+            <class name="com.saucedemo.runners.RegressionTestRunner"/>
+        </classes>
+    </test>
 
 </suite>
