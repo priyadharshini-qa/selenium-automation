@@ -28,6 +28,12 @@ static {
 }
 
 public static String get(String key) {
+    // System property (e.g. -Dbrowser=firefox) always wins over config.properties
+    String systemValue = System.getProperty(key);
+    if (systemValue != null && !systemValue.isBlank()) {
+        return systemValue.trim();
+    }
+
     String value = properties.getProperty(key);
     if (value == null) {
         throw new IllegalArgumentException("Property '" + key + "' not found in config.properties");

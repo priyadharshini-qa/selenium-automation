@@ -17,7 +17,8 @@ import io.cucumber.testng.CucumberOptions;
     plugin = {
         "pretty",                                          // readable console output
         "html:target/cucumber-reports/report.html",        // HTML report
-        "json:target/cucumber.json"                        // for maven-cucumber-reporting
+        "json:target/cucumber.json",                        // for maven-cucumber-reporting
+        "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm" // Allure report
     },
 
     // Show only steps that are defined (no undefined noise)

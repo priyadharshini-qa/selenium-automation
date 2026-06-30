@@ -66,7 +66,7 @@ public abstract class BasePage {
     protected boolean isDisplayed(By locator) {
         try {
             return waitUtils.waitForVisible(locator).isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
     }

@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SauceDemo Automation Suite" parallel="tests" thread-count="3">
+<suite name="SauceDemo Automation Suite">
 
-    <test name="Login Tests">
+    <test name="Cucumber Tests">
         <classes>
             <class name="com.saucedemo.runners.TestRunner"/>
-        </classes>
-    </test>
-    <test name="Smoke Tests">
-        <classes>
-            <class name="com.saucedemo.runners.SmokeTestRunner"/>
-        </classes>
-    </test>
-    <test name="Regression Tests">
-        <classes>
-            <class name="com.saucedemo.runners.RegressionTestRunner"/>
         </classes>
     </test>
 

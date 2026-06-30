@@ -1,5 +1,6 @@
 package com.saucedemo.stepdefinitions;
 import com.saucedemo.config.ConfigReader;
+import com.saucedemo.constants.PageTitles;
 import com.saucedemo.pages.AddToCartPage;
 import com.saucedemo.pages.LoginPage;
 import com.saucedemo.pages.ViewCartPage;
@@ -30,6 +31,9 @@ public class ViewCartSteps {
     }
     @Given("the user logs in as the standard user")
         public void theUserLogsInAsTheStandardUser() {
+            if (loginPage == null) {
+                loginPage = new LoginPage();
+            }
             loginPage.login(ConfigReader.get("standardUsername"), ConfigReader.get("standardPassword"));
     }
 
@@ -45,9 +49,8 @@ public class ViewCartSteps {
 
     @Then("the cart page should be displayed")
     public void theCartPageShouldBeDisplayed() {
-        assertThat(cartPage().isCartPageDisplayed())
-            .as("Expected the cart page to be displayed")
-            .isTrue();
+        assertThat(cartPage().isCartPageDisplayed()).isTrue();
+        assertThat(cartPage().getPageTitle()).isEqualTo(PageTitles.YOUR_CART);
     }
 
     @Then("the cart should contain {string}")

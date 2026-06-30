@@ -24,7 +24,11 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Build and Run Tests
-        run: mvn test -Dheadless=true
+        run: mvn verify -Dheadless=true -Dcucumber.filter.tags="@smoke"
+        working-directory: sauce-demo
+
+      - name: Generate Allure Report
+        run: mvn allure:report
         working-directory: sauce-demo
         
 

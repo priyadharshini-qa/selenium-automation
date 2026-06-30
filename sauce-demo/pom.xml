@@ -26,6 +26,12 @@
         <poi.version>5.2.5</poi.version>
         <extentreports.version>5.1.1</extentreports.version>
         <log4j.version>2.22.1</log4j.version>
+
+        <!-- Defaults for CLI-overridable system properties; left blank/false so
+             ConfigReader falls back to config.properties when not overridden -->
+        <browser></browser>
+        <env></env>
+        <headless>false</headless>
     </properties>
 
     <!-- ===== 3. DEPENDENCIES ===== -->
@@ -118,6 +124,18 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <!-- Allure reporting -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.27.0</version>
+        </dependency>
+        <!-- AspectJ for Allure -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.21</version>
+        </dependency>
         <!--  Assertions (fluent)  -->
         <dependency>
             <groupId>org.assertj</groupId>
@@ -159,11 +177,15 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <!-- Pass browser/env from CLI: mvn test -Dbrowser=chrome -->
+                    <!-- Pass browser/env/headless from CLI: mvn test -Dbrowser=chrome -Dheadless=true -->
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
                         <env>${env}</env>
+                        <headless>${headless}</headless>
                     </systemPropertyVariables>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"
+                    </argLine>
                 </configuration>
             </plugin>
 
@@ -187,6 +209,12 @@
                     </execution>
                 </executions>
             </plugin>
+        <!-- Allure Maven Plugin -->
+        <plugin>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>2.12.0</version>
+        </plugin>
 
         </plugins>
     </build>

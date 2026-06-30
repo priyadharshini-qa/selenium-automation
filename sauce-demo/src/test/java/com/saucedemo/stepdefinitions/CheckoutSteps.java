@@ -1,5 +1,6 @@
 package com.saucedemo.stepdefinitions;
 
+import com.saucedemo.constants.PageTitles;
 import com.saucedemo.pages.CheckoutConfirmationPage;
 import com.saucedemo.pages.CheckoutDetailsPage;
 import io.cucumber.java.en.And;
@@ -32,9 +33,8 @@ public class CheckoutSteps {
 
     @Then("the checkout page should be displayed")
     public void theCheckoutPageShouldBeDisplayed() {
-        assertThat(detailsPage().isCheckoutPageDisplayed())
-            .as("Expected the checkout details page to be displayed")
-            .isTrue();
+        assertThat(detailsPage().isCheckoutPageDisplayed()).isTrue();
+            assertThat(detailsPage().getPageTitle()).isEqualTo(PageTitles.CHECKOUT_YOUR_INFORMATION);
     }
 
     @When("the user enters checkout details {string} {string} {string}")
@@ -63,9 +63,8 @@ public class CheckoutSteps {
 
     @Then("the order overview page should be displayed")
     public void theOrderOverviewPageShouldBeDisplayed() {
-        assertThat(overviewPage().isCheckoutFinalPageDisplayed())
-            .as("Expected the order overview page to be displayed")
-            .isTrue();
+        assertThat(overviewPage().isCheckoutFinalPageDisplayed()).isTrue();
+        assertThat(overviewPage().getPageTitle()).isEqualTo(PageTitles.CHECKOUT_OVERVIEW);
     }
 
     @And("the order summary should contain {string}")
