@@ -18,3 +18,8 @@ sauce-demo/target/screenshots/
 sauce-demo/logs/
 logs/
 *.log
+
+# Test reports
+sauce-demo/target/surefire-reports/
+sauce-demo/allure-results/
+sauce-demo/target/site/

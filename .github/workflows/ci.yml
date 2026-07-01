@@ -28,8 +28,20 @@ jobs:
         working-directory: sauce-demo
 
       - name: Generate Allure Report
+        if: always()
         run: mvn allure:report
         working-directory: sauce-demo
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            sauce-demo/target/cucumber-reports/
+            sauce-demo/target/surefire-reports/
+            sauce-demo/target/site/allure-maven-plugin/
+          retention-days: 30
         
 
       
